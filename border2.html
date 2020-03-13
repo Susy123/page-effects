@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf8">
+	<style>
+		:root {
+			--border-anim-size: 10em;
+			--border-anim-width: 2px;
+			--border-anim-width-nega: -2px;
+			/* calc(var(--border-anim-size) / 20); */
+			--border-anim-width-double: var(--border-anim-width);
+			/* calc(var(--border-anim-width)*2); */
+			--border-corner-width: 2px;
+			--border-anim-duration: 5s;
+			--border-anim-border-color: #2FBAE7;
+			--border-anim-hover-color: LightCoral;
+		}
+
+		body {
+			display: flex;
+			background-color: #070F21;
+			padding: 30px;
+		}
+
+		h1 {
+			color: #2FBAE7;
+		}
+	</style>
+	<style>
+		.border-anim2 {
+			width: var(--border-anim-size);
+			height: var(--border-anim-size);
+			position: relative;
+			border: 0px solid var(--border-anim-border-color);
+			box-shadow: 0px 0px 8px var(--border-anim-border-color) inset;
+		}
+
+		.border-anim2-edge {
+			position: absolute;
+			/* 必须把其他边框置0，否则有默认值存在 */
+			border: 0px solid var(--border-anim-border-color);
+			box-sizing: border-box;
+			box-shadow: 0 0 12px var(--border-anim-border-color);
+		}
+
+		/*
+注意：CSS中不能前向选择，而只能后向选择！ 
+因为如果CSS支持了父选择器，那就必须要页面所有子元素加载完毕才能渲染HTML文档，
+因为所谓“父选择器”，就是后代元素影响祖先元素，如果后代元素还没加载处理，如何影响祖先元素的样式？
+于是，网页渲染呈现速度就会大大减慢，浏览器会出现长时间的白板。
+*/
+		/* 波浪号和加号都是选择其后的元素，区别是加号只取一个，波浪取所有 
+.border-anim-content:hover ~ .border-anim2-edge { */
+		/* .border-anim2:hover>.border-anim2-edge {
+			background-color: var(--border-anim-hover-color);
+		} */
+
+		.border-anim2-left {
+			width: var(--border-anim-width-double);
+			height: 100%;
+			left: var(--border-anim-width-nega);
+			border-left-width: var(--border-anim-width);
+			animation: anim2-border-run-left var(--border-anim-duration) calc(var(--border-anim-duration) / -2) linear infinite;
+		}
+
+		.border-anim2-top {
+			height: var(--border-anim-width-double);
+			width: 100%;
+			top: var(--border-anim-width-nega);
+			border-top-width: var(--border-anim-width);
+			animation: anim2-border-run-top var(--border-anim-duration) linear infinite;
+		}
+
+		.border-anim2-right {
+			width: var(--border-anim-width-double);
+			height: 100%;
+			right: var(--border-anim-width-nega);
+			border-right-width: var(--border-anim-width);
+			animation: anim2-border-run-right var(--border-anim-duration) calc(var(--border-anim-duration) / -2) linear infinite;
+		}
+
+		.border-anim2-bottom {
+			height: var(--border-anim-width-double);
+			width: 100%;
+			bottom: var(--border-anim-width-nega);
+			border-bottom-width: var(--border-anim-width);
+			animation: anim2-border-run-bottom var(--border-anim-duration) linear infinite;
+		}
+
+		@keyframes anim2-border-run-left {
+
+			from,
+			to {
+				height: 0;
+			}
+
+			50% {
+				height: 100%;
+			}
+
+			from,
+			to,
+			49.9% {
+				top: 0;
+				bottom: auto;
+			}
+
+			50%,
+			99.9% {
+				top: auto;
+				bottom: 0;
+			}
+		}
+
+		@keyframes anim2-border-run-top {
+
+			from,
+			to {
+				width: 0;
+			}
+
+			50% {
+				width: 100%;
+			}
+
+			from,
+			to,
+			49.9% {
+				left: auto;
+				right: 0;
+			}
+
+			50%,
+			99.9% {
+				left: 0;
+				right: auto;
+			}
+		}
+
+		@keyframes anim2-border-run-right {
+
+			from,
+			to {
+				height: 0;
+			}
+
+			50% {
+				height: 100%;
+			}
+
+			from,
+			to,
+			49.9% {
+				top: auto;
+				bottom: 0;
+			}
+
+			50%,
+			99.9% {
+				top: 0;
+				bottom: auto;
+			}
+		}
+
+		@keyframes anim2-border-run-bottom {
+
+			from,
+			to {
+				width: 0;
+			}
+
+			50% {
+				width: 100%;
+			}
+
+			from,
+			to,
+			49.9% {
+				left: 0;
+				right: auto;
+			}
+
+			50%,
+			99.9% {
+				left: auto;
+				right: 0;
+			}
+		}
+
+		.corner {
+			position: absolute;
+			width: 15px;
+			height: 15px;
+			border: 0px solid var(--border-anim-border-color);
+		}
+
+		.corner-top {
+			border-top-width: var(--border-corner-width);
+			top: calc(var(--border-corner-width) / -2);
+		}
+
+		.corner-right {
+			border-right-width: var(--border-corner-width);
+			right: calc(var(--border-corner-width) / -2);
+		}
+
+		.corner-left {
+			border-left-width: var(--border-corner-width);
+			left: calc(var(--border-corner-width) / -2);
+		}
+
+		.corner-bottom {
+			border-bottom-width: var(--border-corner-width);
+			bottom: calc(var(--border-corner-width) / -2);
+		}
+	</style>
+</head>
+
+<body>
+	<section>
+		<h1>边框效果示例</h1>
+		<div class="border-anim2">
+			<!-- <div class="border-anim-content"></div> -->
+			<div class="border-anim2-edge border-anim2-left"></div>
+			<div class="border-anim2-edge border-anim2-top"></div>
+			<div class="border-anim2-edge border-anim2-right"></div>
+			<div class="border-anim2-edge border-anim2-bottom"></div>
+			<div class="corner corner-left corner-top"></div>
+			<div class="corner corner-right corner-top"></div>
+			<div class="corner corner-left corner-bottom"></div>
+			<div class="corner corner-right corner-bottom"></div>
+		</div>
+	</section>
+</body>
+
+</html>
