@@ -110,12 +110,12 @@ body {
 	box-sizing: border-box;
 }
 /*
-注意：CSS中不能前向选择，而只能后向选择！ 
+注意：CSS中不能前向选择，而只能后向选择！
 因为如果CSS支持了父选择器，那就必须要页面所有子元素加载完毕才能渲染HTML文档，
 因为所谓“父选择器”，就是后代元素影响祖先元素，如果后代元素还没加载处理，如何影响祖先元素的样式？
 于是，网页渲染呈现速度就会大大减慢，浏览器会出现长时间的白板。
 */
-/* 波浪号和加号都是选择其后的元素，区别是加号只取一个，波浪取所有 
+/* 波浪号和加号都是选择其后的元素，区别是加号只取一个，波浪取所有
 .border-anim-content:hover ~ .border-anim2-edge { */
 .border-anim2:hover > .border-anim2-edge {
 	background-color: var(--border-anim-hover-color);
@@ -285,6 +285,7 @@ body {
 </style>
 </head>
 <body>
+<a href="https://blog.csdn.net/chy555chy/article/details/83792156">原文链接</a>
 <section>
 <h1>(1)通过两矩形的移动来制作动画</h1>
 <div class="border-anim">
